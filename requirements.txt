@@ -2,7 +2,7 @@
 numpy==1.19.0
 pandas==0.25.1
 Flask==1.1.1
-scikit_learn==0.23.1
+scikit_learn==0.24
 gunicorn==19.9.0
 xgboost==1.1.1
 imblearn==0.0
