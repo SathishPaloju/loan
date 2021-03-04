@@ -13,13 +13,13 @@ from bokeh.embed import components
 from sklearn.preprocessing import MinMaxScaler
 #load models at top of app to load into memory only one time
 
-with open(r'models\model_eclf_new.pkl', 'rb') as f:
+with open(r'models/model_eclf_new.pkl', 'rb') as f:
     ensemble_model_new = pickle.load(f)
 
 from sklearn.preprocessing import MinMaxScaler
 # fit scaler on training data
 
-df_train = pd.read_csv(r'data\data.csv')
+df_train = pd.read_csv(r'data/data.csv')
 
 
 app = flask.Flask(__name__,template_folder='templates')
@@ -35,8 +35,6 @@ def report():
 
 @app.route("/predict", methods=['GET', 'POST'])
 def predict():
-    
-        #flask.render_template('predict.html',title="predict ")
     if flask.request.method == 'GET':
         return (flask.render_template('predict.html'))
     if flask.request.method == 'POST':
