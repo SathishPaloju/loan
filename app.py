@@ -13,13 +13,13 @@ from bokeh.embed import components
 from sklearn.preprocessing import MinMaxScaler
 #load models at top of app to load into memory only one time
 
-with open(r'C:\Users\Administrator\Downloads\loan-default-prediction-master\models\model_eclf_new.pkl', 'rb') as f:
+with open(r'models\model_eclf_new.pkl', 'rb') as f:
     ensemble_model_new = pickle.load(f)
 
 from sklearn.preprocessing import MinMaxScaler
 # fit scaler on training data
 
-df_train = pd.read_csv(r'C:\Users\Administrator\Downloads\loan-default-prediction-master\data\data.csv')
+df_train = pd.read_csv(r'data\data.csv')
 
 
 app = flask.Flask(__name__,template_folder='templates')
@@ -103,10 +103,10 @@ def predict():
         temp["Loan_Amount_Term"] = Loan_Amount_Term
         temp["Credit_History"] = Credit_History
         temp["Property_Area"] = Property_Area
-        print(temp)
-        print(df_train)
-        print(temp.columns)
-        print(df_train.columns)
+        #print(temp)
+        #print(df_train)
+        #print(temp.columns)
+        #print(df_train.columns)
         # data normalization with sklearn
         # fit scaler on training data
         norm = MinMaxScaler()
