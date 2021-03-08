@@ -1,20 +1,12 @@
-
-# fit scaler on training data
-from sklearn.preprocessing import MinMaxScaler
 import flask
 import pickle
 import pandas as pd
 import werkzeug
-import numpy as np
 from flask import Flask, render_template, url_for, request
-
 
 #load models at top of app to load into memory only one time
 with open(r'models/model_eclf_new_.pkl', 'rb') as f:
     ensemble_model_new = pickle.load(f)
-
-#load models at top of app to load into memory only one time
-
 #Loading the dataset onto running environment 
 df_train = pd.read_csv(r'data/data.csv')
 
@@ -41,11 +33,11 @@ def predict():
         'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
         'Loan_Amount_Term', 'Credit_History', 'Property_Area']
         Dependents = float(flask.request.form['Dependents'])
-        #print(Dependents)
+        print(Dependents)
         Gender = flask.request.form['Gender']
         #Gender = flask.request.form.get('Gender', type=int)
         #print(Gender)
-        Loan_Amount_Term = flask.request.form['term']
+        Loan_Amount_Term = float(flask.request.form['term'])
         #print(Loan_Amount_Term)
         Married = flask.request.form['Married']
         #print(Married)
@@ -53,13 +45,13 @@ def predict():
         #print(Education)
         Self_Employed = flask.request.form['Self_Employed']
         #print(Self_Employed)
-        ApplicantIncome = flask.request.form['ApplicantIncome']
+        ApplicantIncome = float(flask.request.form['ApplicantIncome'])
         #print(ApplicantIncome)
-        CoapplicantIncome = flask.request.form['CoapplicantIncome']
+        CoapplicantIncome = float(flask.request.form['CoapplicantIncome'])
         Property_Area = flask.request.form['Property_Area']
         #print(Property_Area)
-        Credit_History = flask.request.form['Credit_History']
-        LoanAmount = flask.request.form['LoanAmount']
+        Credit_History = float(flask.request.form['Credit_History'])
+        LoanAmount = float(flask.request.form['LoanAmount'])
         #print(LoanAmount)
         #Data preprocessing
         if Property_Area == "Semiurban":
@@ -104,33 +96,18 @@ def predict():
         temp["Loan_Amount_Term"] = Loan_Amount_Term
         temp["Credit_History"] = Credit_History
         temp["Property_Area"] = Property_Area
-        print(temp)
-        print(df_train)
-        print(temp.columns)
-        print(df_train.columns)
         # data normalization with sklearn
-        # fit scaler on training data
-        norm = MinMaxScaler()
-        #norm = MinMaxScaler().fit(train)
-        scale = temp.copy()
-        scale = norm.fit_transform(temp)
+       
         #make prediction
-        scale = pd.DataFrame(scale, columns=temp.columns)
-        pred = ensemble_model_new.predict(scale)
-        print(pred)
-        """Index(['Gender', 'Married', 'Dependents', 'Education', 'ApplicantIncome',
-            'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term', 'Credit_History',
-            'Property_Area'],
-            dtype='object')
-        Index(['Gender', 'Married', 'Dependents', 'Education', 'Self_Employed',
-            'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount',
-            'Loan_Amount_Term', 'Credit_History', 'Property_Area', 'Loan_Status'],
-            dtype='object')"""
+        #scale = pd.DataFrame(scale, columns=temp.columns)
+        pred = ensemble_model_new.predict(temp)
+        #print(pred)
+        #print(scale)
         if pred ==0:
-            res = 'Loan Denied!'
+            res = 'Sorry Loan Denied !'
         else:
             res = 'Congratulations! Loan Approved!'
         #render form again and add prediction)'''
         return flask.render_template(r'predict.html', result=res)
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True,port=5000)
