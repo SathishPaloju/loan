@@ -26,7 +26,6 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600&display=swap&subset=latin-ext" rel="stylesheet">
 	<link href="{{url_for('static', filename='css/styles.css')}}" rel="stylesheet">
     <link href="{{url_for('static', filename='css/fontawesome-all.css')}}" rel="stylesheet">
-    <link href="{{url_for('static', filename='css/swiper.css')}}" rel="stylesheet">
     <link href="{{url_for('static', filename='css/magnific-popup.css')}}" rel="stylesheet">
 	<link href="{{url_for('static', filename='css/bootstrap.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -117,7 +116,7 @@
                 <div class="col-lg-6">
                     <div class="text-container">
 							<!-- Contact Form -->
-								<form id="contactForm2" data-toggle="validator" data-focus="false" action="{{ url_for('predict') }}" method="POST">
+								<form id="contactForm2" data-toggle="validator" data-focus="true" action="{{ url_for('predict') }}" method="POST">
                                 <div class="form-group">
                                     <input name="Gender" list="Gender" class="form-control-input" select required>
                                     <label class="label-control" for="Gender">Gender</label>
@@ -129,8 +128,8 @@
                                     <div class="help-block with-errors"></div>
                                 </div>
 								<div class="form-group" >
-									<input name="Dependents" type="number" min="1" max="8" class="form-control-input" required>
-									<label class="label-control" for="Dependents"> Dependents</label>
+									<input name="Dependents" type="number" min="0" max="3" class="form-control-input" required>
+									<label class="label-control" for="Dependents"> Dependents(in range of 0-3)</label>
 									<div class="help-block with-errors"></div>
 
 								</div>
@@ -147,7 +146,7 @@
                                 </div>
                                 <div class="form-group">
                                     <input name="Education" list="Education" class="form-control-input" required select>
-                                    <label class="label-control" for="Education">Education</label>
+                                    <label class="label-control" placeholder="education" for="Education">Education</label>
                                     <datalist id="Education">
                                         <option id="Graduate">Graduate</option>
                                         <option id="Not Graduate">Not Graduate</option>
@@ -160,19 +159,19 @@
                                     <label class="label-control" for="Self_Employed">Self_Employed:</label>
                                     <datalist id="Self_Employed">
                                         <option value= "Self_Employed">Self_Employed</option>
-                                        <option value=" Not Self_Employed">Not Self_Employed</option>
+                                        <option value="Not Self_Employed">Not Self_Employed</option>
                                 
                                     </datalist>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                 
-                                    <input name="term" type="number" min="1" max="24" class="form-control-input" required>
-                                    <label class="label-control" for="term">Loan Amount Term(in Months)</label>
+                                    <input name="term" type="number" min="1"  class="form-control-input" required>
+                                    <label class="label-control" for="term">Loan Amount Term</label>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input name="ApplicantIncome" type="number" class="form-control-input" required >
+                                    <input name="ApplicantIncome" type="number" class="form-control-input" required ><br>
                                     <label class="label-control" for="ApplicantIncome"> ApplicantIncome</label>
                                     <div class="help-block with-errors"></div>
                                 
@@ -193,22 +192,22 @@
                                     <div class="help-block with-errors"></div>
                                 </div>
 								<div class="form-group">
-                                    <input name="Credit_History" type="number" min="0" max="110" class="form-control-input" id="Credit_History" required
+                                    <input name="Credit_History" type="number" min="0" max="1" class="form-control-input" id="Credit_History" required
                                         >
                                     <label class="label-control" for="Credit_History">Credit_History:</label>
                                     <datalist id="Credit_History">
-                                        <option id="1">1</option>
-                                        <option id="0">0</option>
+                                        <option >1</option>
+                                        <option >0</option>
                                 
                                     </datalist>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
-                                    <input name="LoanAmount" class="form-control-input" type="number" min="500" max="400000" id="LoanAmount" required>
+                                    <input name="LoanAmount" class="form-control-input" type="number"  max="100000" id="LoanAmount" required>
                                     <label class="label-control" for="LoanAmount">Loan Amount :</label>
                                     <div class="help-block with-errors"></div>
                                 </div>								
-                               
+
 							
                     </div> <!-- end of contact form -->
                 </div> 	<!-- end of text-container -->
@@ -225,8 +224,8 @@
 
                 </span>
                 <span></span><div></div>
-				<br> Loan Decision:
-				<p style="font-size:50px">{{ result }}</p>
+				<br> Loan Decision:<br>
+				<p >{{ result }}</p>
 				
 				</div>
 				</div>
@@ -246,7 +245,7 @@
     <script src="{{url_for('static', filename='js/isotope.pkgd.min.js')}}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script src="{{url_for('static', filename='js/validator.min.js')}}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
 	<script src="{{url_for('static', filename='js/scripts.js')}}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
-		<script src="{{url_for('static', filename='js/swiper.js')}}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+		<script src="{{url_for('static', filename='js/swiper.min.js')}}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
 
 </body>
 </html>
