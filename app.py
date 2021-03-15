@@ -1,4 +1,3 @@
-import flask
 import pickle
 import pandas as pd
 import werkzeug
