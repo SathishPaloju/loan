@@ -110,4 +110,4 @@ def predict():
         #render form again and add prediction)'''
         return flask.render_template(r'predict.html', result=res)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
